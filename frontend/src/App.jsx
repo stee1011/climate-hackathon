@@ -12,7 +12,9 @@ import {
   YAxis
 } from "recharts";
 
-const DEFAULT_ENDPOINT = "http://localhost:8000/predict";
+const DEFAULT_ENDPOINT = import.meta.env.VITE_API_URL
+  ? `${import.meta.env.VITE_API_URL}/predict`
+  : "http://localhost:8000/predict";
 
 const defaultDatum = {
   Country: "Canada",

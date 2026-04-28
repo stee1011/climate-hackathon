@@ -5,7 +5,10 @@ from typing import Dict, Optional, Tuple
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import streamlit as st
+try:
+    import streamlit as st
+except ImportError:  # Streamlit is optional for API usage
+    st = None
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 from statsmodels.graphics.gofplots import qqplot
 from statsmodels.stats.diagnostic import acorr_ljungbox
@@ -261,14 +264,23 @@ def save_model(model_fit, path: str = MODEL_PATH):
     model_fit.save(path)
 
 
-@st.cache_resource(show_spinner=False)
-def load_persisted_model(path: str = MODEL_PATH):
-    try:
-        from statsmodels.tsa.statespace.sarimax import SARIMAXResults
+if st is not None:
+    @st.cache_resource(show_spinner=False)
+    def load_persisted_model(path: str = MODEL_PATH):
+        try:
+            from statsmodels.tsa.statespace.sarimax import SARIMAXResults
 
-        return SARIMAXResults.load(path)
-    except Exception:
-        return None
+            return SARIMAXResults.load(path)
+        except Exception:
+            return None
+else:
+    def load_persisted_model(path: str = MODEL_PATH):
+        try:
+            from statsmodels.tsa.statespace.sarimax import SARIMAXResults
+
+            return SARIMAXResults.load(path)
+        except Exception:
+            return None
 
 
 def plot_train_test_forecast(yearly_df: pd.DataFrame, train: pd.Series, test: pd.Series, forecast: pd.Series):
@@ -303,6 +315,9 @@ def plot_residual_diagnostics(model_fit):
 
 
 def main():
+    if st is None:
+        raise RuntimeError("Streamlit is required to run the Streamlit app.")
+
     st.set_page_config(page_title="CO2 SARIMA Scientific Console", layout="wide")
     st.title("CO2 Emissions Forecasting - SARIMA Analysis")
     st.caption("Minimal interface focused on model behavior, diagnostics, and reproducible forecasting.")
