@@ -78,6 +78,7 @@ Canada,CAN,Main Activity Electricity and Heat Production,fossil,45100,49500,...,
 
 ## 🏃‍♂️ Running the Application
 
+<<<<<<< HEAD
 ### Option 1: Docker Compose (Recommended - All 3 Services)
 
 **Prerequisites:** Docker and Docker Compose installed. For WSL2 users, ensure Docker Desktop is running with WSL2 backend.
@@ -108,6 +109,9 @@ docker compose up --build
 ```
 
 ### Option 2: Full Stack (Traditional Local Development)
+=======
+### Option 1: Full Stack (Recommended)
+>>>>>>> 398ee7dee61197a183602f84ef81d1d266db8d75
 
 1. **Start the FastAPI backend:**
    ```bash
@@ -126,7 +130,11 @@ docker compose up --build
    - Frontend Dashboard: http://localhost:5173
    - API Documentation: http://localhost:8000/docs
 
+<<<<<<< HEAD
 ### Option 3: Streamlit Analysis Interface Only
+=======
+### Option 2: Streamlit Analysis Interface
+>>>>>>> 398ee7dee61197a183602f84ef81d1d266db8d75
 
 ```bash
 # From project root
@@ -135,7 +143,11 @@ streamlit run app.py
 
 Access at: http://localhost:8501
 
+<<<<<<< HEAD
 ### Option 4: API Only
+=======
+### Option 3: API Only
+>>>>>>> 398ee7dee61197a183602f84ef81d1d266db8d75
 
 ```bash
 uvicorn streamlit_backend_api:app --host 0.0.0.0 --port 8000 --reload
@@ -221,13 +233,18 @@ climate-emissions-forecasting/
 ├── app.py                          # Streamlit analysis interface
 ├── streamlit_backend_api.py        # FastAPI prediction service
 ├── climate_sarima_model.ipynb      # Jupyter notebook (analysis)
+<<<<<<< HEAD
 ├── requirements.txt                # Full Python dependencies
 ├── requirements-api.txt            # FastAPI service dependencies
 ├── requirements-streamlit.txt      # Streamlit service dependencies
+=======
+├── requirements.txt                # Python dependencies
+>>>>>>> 398ee7dee61197a183602f84ef81d1d266db8d75
 ├── data.csv                        # CO₂ emission dataset
 ├── data_n2o.csv                    # N₂O emission dataset
 ├── data_ch4.csv                    # CH₄ emission dataset
 ├── sarima_model.pkl               # Cached model file
+<<<<<<< HEAD
 ├── docker-compose.yml             # Multi-container orchestration
 ├── Dockerfile.api                 # FastAPI service image
 ├── Dockerfile.streamlit           # Streamlit service image
@@ -242,6 +259,16 @@ climate-emissions-forecasting/
 │   │   ├── App.jsx               # Main React component
 │   │   ├── main.jsx              # React entry point
 │   │   └── styles.css            # Application styles
+=======
+├── frontend/
+│   ├── package.json               # Node.js dependencies
+│   ├── vite.config.js            # Vite configuration
+│   ├── index.html                # Main HTML file
+│   ├── src/
+│   │   ├── App.jsx              # Main React component
+│   │   ├── main.jsx             # React entry point
+│   │   └── styles.css           # Application styles
+>>>>>>> 398ee7dee61197a183602f84ef81d1d266db8d75
 │   └── public/
 │       ├── data_catalog.json     # Sample CO₂ data
 │       ├── data_catalog_n2o.json # Sample N₂O data
@@ -249,6 +276,7 @@ climate-emissions-forecasting/
 └── README.md                     # This file
 ```
 
+<<<<<<< HEAD
 ## 🐳 Docker Deployment
 
 The application is fully containerized with three separate microservices orchestrated via Docker Compose.
@@ -364,6 +392,8 @@ Services communicate via the `climate-net` bridge network:
 - Store project inside WSL filesystem (`/home/user/...`) not `/mnt/c/...`
 - Improves build and runtime performance significantly
 
+=======
+>>>>>>> 398ee7dee61197a183602f84ef81d1d266db8d75
 ## 🛠️ Development
 
 ### Adding New Gas Types
@@ -429,4 +459,8 @@ For questions or issues:
 
 *"We are the first generation to feel the impact of climate change and the last generation that can do something about it."*  
 — Barack Obama, 2014 UN Summit</content>
+<<<<<<< HEAD
 <parameter name="filePath">c:\Users\codew\Desktop\climate\README.md
+=======
+<parameter name="filePath">c:\Users\codew\Desktop\climate\README.md
+>>>>>>> 398ee7dee61197a183602f84ef81d1d266db8d75
