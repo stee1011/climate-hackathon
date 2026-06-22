@@ -1,0 +1,51 @@
+# ─────────────────────────────────────────────
+# ADD THIS TO YOUR TEAMMATE'S docker-compose.yml
+# ─────────────────────────────────────────────
+#
+# Your teammate already has entries for:
+#   frontend  (React, port 5173)
+#   api       (FastAPI SARIMA, port 8000)
+#   streamlit (Research UI, port 8501)  ← they may need to update this
+#
+# Add the "scenario" service below to their file.
+# It sits alongside the others on the same network.
+#
+# ─────────────────────────────────────────────
+# IMPORTANT: Send your teammate this whole block.
+# They paste it into their docker-compose.yml
+# under the "services:" section.
+# ─────────────────────────────────────────────
+
+services:
+  scenario:
+    build:
+      context: ./scenario          # folder where your files live
+      dockerfile: Dockerfile
+    container_name: scenario-forecasting
+    ports:
+      - "8501:8501"                # Streamlit UI
+      - "8502:8502"                # Scenario Forecast API
+    volumes:
+      - ./data/data.csv:/app/data.csv:ro          # shared CO2 data (read-only)
+      - ./data/data_ch4.csv:/app/data_ch4.csv:ro  # shared CH4 data
+      - ./data/data_n2o.csv:/app/data_n2o.csv:ro  # shared N2O data
+    environment:
+      - PYTHONUNBUFFERED=1
+    networks:
+      - climate-net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8502/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    depends_on:
+      - api                        # waits for teammate's SARIMA API to start first
+    restart: unless-stopped
+
+# NOTE: The "networks" and top-level "services" key
+# already exist in your teammate's file.
+# Only add the "scenario:" block above, not these:
+
+# networks:
+#   climate-net:
+#     driver: bridge
