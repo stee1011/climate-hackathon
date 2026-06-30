@@ -6,6 +6,6 @@ export default defineConfig({
   server: {
     host: "0.0.0.0",
     port: 5173,
-    allowedHosts: ["talented-charisma-production-9b8c.up.railway.app"]
+    allowedHosts: [".up.railway.app"]
   }
 });
