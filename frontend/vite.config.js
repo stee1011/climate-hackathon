@@ -6,9 +6,13 @@ export default defineConfig({
   server: {
     host: "0.0.0.0",
     port: 5173,
-    allowedHosts: [
-      "considerate-learning-production.up.railway.app",
-      ".up.railway.app"
-    ]
+    strictPort: true,
+    allowedHosts: true
+  },
+  preview: {
+    host: "0.0.0.0",
+    port: 4173,
+    strictPort: true,
+    allowedHosts: true
   }
 });
